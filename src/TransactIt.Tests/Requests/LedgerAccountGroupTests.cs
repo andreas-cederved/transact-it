@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TransactIt.Application.Write.LedgerAccountGroups;
 using TransactIt.Data.Contexts;
+using TransactIt.Intersection.Exceptions;
 using TransactIt.Tests.Extensions;
 
 namespace TransactIt.Tests.Requests
@@ -48,6 +49,18 @@ namespace TransactIt.Tests.Requests
             var handler = new SaveLedgerAccountGroupRequestHandler(_trackingContext, Mapper.Instance);
             var result = await handler.Handle(request, default(CancellationToken));
             Assert.AreEqual(result, Unit.Value);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NotFoundException), "Entity \"Ledger\" (666) was not found")]
+        public async Task SaveLedgerAccountGroup_Failure_NoParentLedger()
+        {
+            var ledgerId = 666;
+            var model = new Domain.Models.LedgerAccountGroup { Number = 3000, Name = "TestLedger", Description = "TestLedger description" };
+            var request = new SaveLedgerAccountGroupRequest(ledgerId, model);
+
+            var handler = new SaveLedgerAccountGroupRequestHandler(_trackingContext, Mapper.Instance);
+            var result = await handler.Handle(request, default(CancellationToken));
         }
 
         [DataTestMethod]

@@ -22,7 +22,6 @@ namespace TransactIt.Application.Read.Ledgers
         public async Task<Ledger> Handle(FindLedgerByIdRequest request, CancellationToken cancellationToken)
         {
             var result = await _context.Ledgers
-                .Include(x => x.FinancialTransactions)
                 .Include(x => x.LedgerAccountGroups)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
             return _mapper.Map<Ledger>(result);
