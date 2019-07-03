@@ -32,6 +32,7 @@ namespace TransactIt.Tests.Requests
             Mapper.Initialize(x => x.AddProfile<Infrastructure.Profiles.LedgerProfile>());
         }
 
+        // Not sure what wrong with the config yet...
         [TestMethod]
         public void ProfileConfiguration()
         {
@@ -53,6 +54,7 @@ namespace TransactIt.Tests.Requests
             Assert.AreEqual(expectedResultCount, result.Count);
         }
 
+        // Broken in current version of ef core preview in memory context.
         [TestMethod]
         public async Task FindLedgerById_Success()
         {

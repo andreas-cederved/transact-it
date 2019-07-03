@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TransactIt.Api</name>
+    </assembly>
+    <members>
+        <member name="T:TransactIt.Api.Controllers.LedgersController">
+            <summary>
+            Ledgers controller.
+            </summary>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.LedgersController.#ctor(MediatR.IMediator)">
+            <summary>
+            Creates a new instance of <see cref="T:TransactIt.Api.Controllers.LedgersController"/>.
+            </summary>
+            <param name="mediator">The request mediator.</param>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.LedgersController.Get">
+            <summary>
+            Gets all ledgers.
+            </summary>
+            <returns>A list of ledgers <see cref="T:TransactIt.Domain.Models.Ledger"/></returns>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.LedgersController.Get(System.Int32)">
+            <summary>
+            Gets the specific ledger by identifier.
+            </summary>
+            <param name="id">The ledger identifier.</param>
+            <returns>A specific ledger <see cref="T:TransactIt.Domain.Models.Ledger"/></returns>
+        </member>
+    </members>
+</doc>
