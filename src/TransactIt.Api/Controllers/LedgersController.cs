@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 using TransactIt.Application.Read.Ledgers;
 
 namespace TransactIt.Api.Controllers
@@ -33,6 +35,9 @@ namespace TransactIt.Api.Controllers
         /// </summary>
         /// <returns>A list of ledgers <see cref="Domain.Models.Ledger"/></returns>
         [HttpGet]
+        [SwaggerResponse(200, "Successfully retrieved data.", typeof(IEnumerable<Domain.Models.Ledger>))]
+        [SwaggerResponse(204, "Request successful, no data found.")]
+        [SwaggerResponse(400, "Invalid request or data.", typeof(IEnumerable<ValidationFailure>))]
         public async Task<IEnumerable<Domain.Models.Ledger>> Get()
         {
             return await _mediator.Send(new FindAllLedgersRequest());
@@ -44,6 +49,9 @@ namespace TransactIt.Api.Controllers
         /// <param name="id">The ledger identifier.</param>
         /// <returns>A specific ledger <see cref="Domain.Models.Ledger"/></returns>
         [HttpGet("{id}")]
+        [SwaggerResponse(200, "Successfully retrieved data.", typeof(Domain.Models.Ledger))]
+        [SwaggerResponse(204, "Request successful, no data found.")]
+        [SwaggerResponse(400, "Invalid request or data.", typeof(IEnumerable<ValidationFailure>))]
         public async Task<Domain.Models.Ledger> Get(int id)
         {
             return await _mediator.Send(new FindLedgerByIdRequest(id));

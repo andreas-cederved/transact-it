@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -77,6 +78,13 @@ namespace TransactIt.Api
                 c.IncludeXmlComments(xmlPath);
                 c.EnableAnnotations();
             });
+
+            //workaround bug in asp.net core 3 preview
+            services.Add(
+                new ServiceDescriptor(
+                    typeof(IActionResultExecutor<JsonResult>),
+                    Type.GetType("Microsoft.AspNetCore.Mvc.Infrastructure.SystemTextJsonResultExecutor, Microsoft.AspNetCore.Mvc.Core"),
+                    ServiceLifetime.Singleton));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
