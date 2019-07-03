@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="8.1.1" />
+    <PackageReference Include="FluentValidation" Version="8.5.0-preview2" />
     <PackageReference Include="MediatR" Version="7.0.0" />
   </ItemGroup>
 

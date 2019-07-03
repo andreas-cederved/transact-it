@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TransactIt.Api.Filters;
 using TransactIt.Infrastructure.Extensions;
 
 namespace TransactIt.Api
@@ -29,7 +30,10 @@ namespace TransactIt.Api
             services.AddAutoMapperWithProfiles();
             services.AddDatabaseContexts(Configuration);
             services.AddMediatorWithRequests();
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new ValidationExceptionFilter());
+            }).AddFluentValidators();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

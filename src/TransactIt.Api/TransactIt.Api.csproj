@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TransactIt.Domain\TransactIt.Domain.csproj" />
     <ProjectReference Include="..\TransactIt.Infrastructure\TransactIt.Infrastructure.csproj" />
+    <ProjectReference Include="..\TransactIt.Intersection\TransactIt.Intersection.csproj" />
   </ItemGroup>
 
 </Project>

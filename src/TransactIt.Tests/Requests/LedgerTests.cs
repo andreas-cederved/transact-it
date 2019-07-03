@@ -68,6 +68,21 @@ namespace TransactIt.Tests.Requests
             Assert.AreEqual(selectedId, result.Id);
         }
 
+        [DataTestMethod]
+        [DataRow(0, false)]
+        [DataRow(1, true)]
+        [DataRow(3243243, true)]
+        public async Task FindLedgerById_Validation(int id, bool isValid)
+        {
+            var request = new FindLedgerByIdRequest(id);
+
+            var validator = new FindLedgerByIdValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            Assert.AreEqual(isValid, validationResult.IsValid);
+        }
+
+
 
 
 
