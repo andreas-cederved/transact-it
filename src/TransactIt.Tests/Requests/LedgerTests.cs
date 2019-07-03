@@ -53,6 +53,21 @@ namespace TransactIt.Tests.Requests
             Assert.AreEqual(expectedResultCount, result.Count);
         }
 
+        [TestMethod]
+        public async Task FindLedgerById_Success()
+        {
+            var dataGenerationResult = _noTrackingContext.AddTestData<Domain.Entities.Ledger>(1);
+            Assert.IsTrue(dataGenerationResult.Item1);
+
+            var selectedId = dataGenerationResult.Item2[0];
+            var request = new FindLedgerByIdRequest(selectedId);
+
+            var handler = new FindLedgerByIdRequestHandler(_noTrackingContext, Mapper.Instance);
+            var result = await handler.Handle(request, default(CancellationToken));
+            Assert.IsNotNull(result);
+            Assert.AreEqual(selectedId, result.Id);
+        }
+
 
 
 
