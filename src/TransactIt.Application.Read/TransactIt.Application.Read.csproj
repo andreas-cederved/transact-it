@@ -15,4 +15,8 @@
     <ProjectReference Include="..\TransactIt.Domain\TransactIt.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="LedgerAccountGroups\" />
+  </ItemGroup>
+
 </Project>
