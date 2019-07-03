@@ -28,5 +28,12 @@
             <param name="id">The ledger identifier.</param>
             <returns>A specific ledger <see cref="T:TransactIt.Domain.Models.Ledger"/></returns>
         </member>
+        <member name="M:TransactIt.Api.Controllers.LedgersController.Create(TransactIt.Domain.Models.Ledger)">
+            <summary>
+            Creates a new ledger.
+            </summary>
+            <param name="model">A ledger model sent through request body.</param>
+            <returns>This is a command it does not send a modeled response.</returns>
+        </member>
     </members>
 </doc>

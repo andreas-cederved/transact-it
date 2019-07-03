@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -7,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TransactIt.Application.Read.Ledgers;
+using TransactIt.Application.Write.Ledgers;
 using TransactIt.Data.Contexts;
 using TransactIt.Tests.Extensions;
 
@@ -81,6 +83,35 @@ namespace TransactIt.Tests.Requests
             var validator = new FindLedgerByIdValidator();
             var validationResult = await validator.ValidateAsync(request);
 
+            Assert.AreEqual(isValid, validationResult.IsValid);
+        }
+
+        [TestMethod]
+        public async Task SaveLedger_Success()
+        {
+            var model = new Domain.Models.Ledger { Name = "TestLedger", Description = "TestLedger description" };
+            var request = new SaveLedgerRequest(model);
+
+            var handler = new SaveLedgerRequestHandler(_trackingContext, Mapper.Instance);
+            var result = await handler.Handle(request, default(CancellationToken));
+            Assert.AreEqual(result, Unit.Value);
+        }
+
+        [DataTestMethod]
+        [DataRow("", true, false)]
+        [DataRow("Test", true, true)]
+        [DataRow(null, false, false)]
+        [DataRow(null, true, false)]
+        public async Task SaveLedger_Validation(string ledgerName, bool instantiateModel, bool isValid)
+        {
+            Domain.Models.Ledger model = null;
+            if (instantiateModel)
+            {
+                model = new Domain.Models.Ledger { Name = ledgerName };
+            }
+            var request = new SaveLedgerRequest(model);
+            var validator = new SaveLedgerValidator();
+            var validationResult = await validator.ValidateAsync(request);
             Assert.AreEqual(isValid, validationResult.IsValid);
         }
 

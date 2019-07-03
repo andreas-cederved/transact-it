@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using TransactIt.Application.Read.Ledgers;
+using TransactIt.Application.Write.Ledgers;
 
 namespace TransactIt.Api.Controllers
 {
@@ -55,6 +56,19 @@ namespace TransactIt.Api.Controllers
         public async Task<Domain.Models.Ledger> Get(int id)
         {
             return await _mediator.Send(new FindLedgerByIdRequest(id));
+        }
+
+        /// <summary>
+        /// Creates a new ledger.
+        /// </summary>
+        /// <param name="model">A ledger model sent through request body.</param>
+        /// <returns>This is a command it does not send a modeled response.</returns>
+        [HttpPost]
+        [SwaggerResponse(200, "Successfully saved data.", typeof(Domain.Models.Ledger))]
+        [SwaggerResponse(400, "Invalid request or data.", typeof(IEnumerable<ValidationFailure>))]
+        public async Task Create([FromBody] Domain.Models.Ledger model)
+        {
+            await _mediator.Send(new SaveLedgerRequest(model));
         }
     }
 }
