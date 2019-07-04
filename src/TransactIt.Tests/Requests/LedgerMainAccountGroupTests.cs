@@ -3,8 +3,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using TransactIt.Application.Write.LedgerMainAccountGroups;
@@ -41,12 +39,6 @@ namespace TransactIt.Tests.Requests
         }
 
         [TestMethod]
-        public void ProfileConfiguration()
-        {
-            Mapper.AssertConfigurationIsValid();
-        }
-
-        [TestMethod]
         public async Task SaveMainLedgerAccountGroup_Success()
         {
             var expectedResultCount = 1;
@@ -55,7 +47,7 @@ namespace TransactIt.Tests.Requests
             Assert.IsTrue(dataGenerationResult.Item1);
 
             var ledgerId = dataGenerationResult.Item2[0];
-            var model = new Domain.Models.LedgerMainAccountGroup { Number = 3000, Name = "TestLedger", Description = "TestLedger description" };
+            var model = new Domain.Models.LedgerMainAccountGroup { Number = 1, Name = "Tillgångar" };
             var request = new SaveLedgerMainAccountGroupRequest(ledgerId, model);
 
             var handler = new SaveLedgerMainAccountGroupRequestHandler(_trackingContext, Mapper.Instance);

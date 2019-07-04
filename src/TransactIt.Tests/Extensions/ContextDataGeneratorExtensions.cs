@@ -55,6 +55,11 @@ namespace TransactIt.Tests.Extensions
                         continue;
                     }
 
+                    if (property.Name.EndsWith("Id"))
+                    {
+                        property.SetValue(entity, i+1);
+                    }
+
                     if (property.PropertyType == typeof(string))
                     {
                         property.SetValue(entity, Random.GenerateString(10));

@@ -54,5 +54,25 @@
             <param name="model">A ledger model sent through request body.</param>
             <returns>This is a command it does not send a modeled response.</returns>
         </member>
+        <member name="T:TransactIt.Api.Controllers.LedgerSubAccountGroupsController">
+            <summary>
+            Ledger sub account groups controller.
+            </summary>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.LedgerSubAccountGroupsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Creates a new instance of <see cref="T:TransactIt.Api.Controllers.LedgerSubAccountGroupsController"/>.
+            </summary>
+            <param name="mediator">The request mediator.</param>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.LedgerSubAccountGroupsController.Create(System.Int32,System.Int32,TransactIt.Domain.Models.LedgerSubAccountGroup)">
+            <summary>
+            Creates a new ledger sub account group.
+            </summary>
+            <param name="ledgerId">The grand parent ledger identifier.</param>
+            <param name="ledgerMainAccountGroupId">The parent ledger main account group identifier.</param>
+            <param name="model">A ledger sub account group model sent through request body.</param>
+            <returns>This is a command it does not send a modeled response.</returns>
+        </member>
     </members>
 </doc>
