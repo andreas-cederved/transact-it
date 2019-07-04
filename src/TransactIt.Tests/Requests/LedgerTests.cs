@@ -31,10 +31,17 @@ namespace TransactIt.Tests.Requests
             var optionsTrackingContext = new DbContextOptionsBuilder<TrackingContext>().UseInMemoryDatabase(inMemoryDatabaseReference).Options;
             _trackingContext = new TrackingContext(optionsTrackingContext);
 
-            Mapper.Initialize(x => x.AddProfile<Infrastructure.Profiles.LedgerProfile>());
+            Mapper.Initialize(x =>
+            {
+                x.AddProfile<Infrastructure.Profiles.LedgerProfile>();
+                x.AddProfile<Infrastructure.Profiles.FinancialTransactionProfile>();
+                x.AddProfile<Infrastructure.Profiles.LedgerMainAccountGroupProfile>();
+                x.AddProfile<Infrastructure.Profiles.LedgerSubAccountGroupProfile>();
+                x.AddProfile<Infrastructure.Profiles.LedgerAccountProfile>();
+                x.AddProfile<Infrastructure.Profiles.AccountingEntryProfile>();
+            });
         }
 
-        // Not sure what wrong with the config yet...
         [TestMethod]
         public void ProfileConfiguration()
         {

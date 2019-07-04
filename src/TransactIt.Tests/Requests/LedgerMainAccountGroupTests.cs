@@ -31,7 +31,19 @@ namespace TransactIt.Tests.Requests
             var optionsTrackingContext = new DbContextOptionsBuilder<TrackingContext>().UseInMemoryDatabase(inMemoryDatabaseReference).Options;
             _trackingContext = new TrackingContext(optionsTrackingContext);
 
-            Mapper.Initialize(x => x.AddProfile<Infrastructure.Profiles.LedgerMainAccountGroupProfile>());
+            Mapper.Initialize(x =>
+            {
+                x.AddProfile<Infrastructure.Profiles.LedgerMainAccountGroupProfile>();
+                x.AddProfile<Infrastructure.Profiles.LedgerSubAccountGroupProfile>();
+                x.AddProfile<Infrastructure.Profiles.LedgerAccountProfile>();
+                x.AddProfile<Infrastructure.Profiles.AccountingEntryProfile>();
+            });
+        }
+
+        [TestMethod]
+        public void ProfileConfiguration()
+        {
+            Mapper.AssertConfigurationIsValid();
         }
 
         [TestMethod]
