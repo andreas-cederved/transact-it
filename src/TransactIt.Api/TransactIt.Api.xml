@@ -4,6 +4,25 @@
         <name>TransactIt.Api</name>
     </assembly>
     <members>
+        <member name="T:TransactIt.Api.Controllers.FinancialTransactionsController">
+            <summary>
+            Financial transactions controller.
+            </summary>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.FinancialTransactionsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Creates a new instance of <see cref="T:TransactIt.Api.Controllers.FinancialTransactionsController"/>.
+            </summary>
+            <param name="mediator">The request mediator.</param>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.FinancialTransactionsController.Create(System.Int32,TransactIt.Domain.Models.FinancialTransaction)">
+            <summary>
+            Creates a new financial transaction.
+            </summary>
+            <param name="ledgerId">The parent ledger identifier.</param>
+            <param name="model">A financial transaction model sent through request body.</param>
+            <returns>This is a command it does not send a modeled response.</returns>
+        </member>
         <member name="T:TransactIt.Api.Controllers.LedgerAccountsController">
             <summary>
             Ledger accounts controller.

@@ -23,6 +23,8 @@ namespace TransactIt.Application.Read.Ledgers
         {
             var result = await _context.Ledgers
                 .Include(x => x.LedgerMainAccountGroups)
+                .ThenInclude(x => x.LedgerSubAccountGroups)
+                .ThenInclude(x => x.LedgerAccounts)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
             return _mapper.Map<Ledger>(result);
         }

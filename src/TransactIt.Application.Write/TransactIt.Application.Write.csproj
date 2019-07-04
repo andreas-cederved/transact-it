@@ -16,4 +16,8 @@
     <ProjectReference Include="..\TransactIt.Intersection\TransactIt.Intersection.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AccountingEntries\" />
+  </ItemGroup>
+
 </Project>
