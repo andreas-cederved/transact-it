@@ -4,6 +4,25 @@
         <name>TransactIt.Api</name>
     </assembly>
     <members>
+        <member name="T:TransactIt.Api.Controllers.LedgerAccountsController">
+            <summary>
+            Ledger accounts controller.
+            </summary>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.LedgerAccountsController.#ctor(MediatR.IMediator)">
+            <summary>
+            Creates a new instance of <see cref="T:TransactIt.Api.Controllers.LedgerAccountsController"/>.
+            </summary>
+            <param name="mediator">The request mediator.</param>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.LedgerAccountsController.Create(System.Int32,TransactIt.Domain.Models.LedgerAccount)">
+            <summary>
+            Creates a new ledger account.
+            </summary>
+            <param name="ledgerSubAccountGroupId">The parent ledger sub account group identifier.</param>
+            <param name="model">A ledger account model sent through request body.</param>
+            <returns>This is a command it does not send a modeled response.</returns>
+        </member>
         <member name="T:TransactIt.Api.Controllers.LedgerMainAccountGroupsController">
             <summary>
             Ledger main account groups controller.
