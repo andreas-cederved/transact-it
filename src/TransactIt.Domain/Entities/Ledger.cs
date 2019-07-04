@@ -11,6 +11,6 @@ namespace TransactIt.Domain.Entities
         public DateTime CreatedDate { get; set; }
 
         public virtual IEnumerable<FinancialTransaction> FinancialTransactions { get; set; }
-        public virtual IEnumerable<LedgerAccountGroup> LedgerAccountGroups { get; set; }
+        public virtual IEnumerable<LedgerMainAccountGroup> LedgerMainAccountGroups { get; set; }
     }
 }

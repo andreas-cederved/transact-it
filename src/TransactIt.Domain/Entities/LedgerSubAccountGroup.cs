@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace TransactIt.Domain.Entities
 {
-    public class LedgerAccount
+    public class LedgerSubAccountGroup
     {
         public int Id { get; set; }
         public int Number { get; set; }
@@ -12,9 +11,9 @@ namespace TransactIt.Domain.Entities
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public int LedgerSubAccountGroupId { get; set; }
-        public virtual LedgerSubAccountGroup LedgerSubAccountGroup { get; set; }
+        public int LedgerMainAccountGroupId { get; set; }
+        public virtual LedgerMainAccountGroup LedgerMainAccountGroup { get; set; }
 
-        public virtual IEnumerable<AccountingEntry> AccountingEntries { get; set; }
+        public virtual IEnumerable<LedgerAccount> LedgerAccounts { get; set; }
     }
 }

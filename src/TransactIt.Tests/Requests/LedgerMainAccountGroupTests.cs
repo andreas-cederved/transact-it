@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using TransactIt.Application.Write.LedgerAccountGroups;
+using TransactIt.Application.Write.LedgerMainAccountGroups;
 using TransactIt.Data.Contexts;
 using TransactIt.Intersection.Exceptions;
 using TransactIt.Tests.Extensions;
@@ -15,7 +15,7 @@ using TransactIt.Tests.Extensions;
 namespace TransactIt.Tests.Requests
 {
     [TestClass]
-    public class LedgerAccountGroupTests
+    public class LedgerMainAccountGroupTests
     {
         private NoTrackingContext _noTrackingContext;
         private TrackingContext _trackingContext;
@@ -31,11 +31,11 @@ namespace TransactIt.Tests.Requests
             var optionsTrackingContext = new DbContextOptionsBuilder<TrackingContext>().UseInMemoryDatabase(inMemoryDatabaseReference).Options;
             _trackingContext = new TrackingContext(optionsTrackingContext);
 
-            Mapper.Initialize(x => x.AddProfile<Infrastructure.Profiles.LedgerAccountGroupProfile>());
+            Mapper.Initialize(x => x.AddProfile<Infrastructure.Profiles.LedgerMainAccountGroupProfile>());
         }
 
         [TestMethod]
-        public async Task SaveLedgerAccountGroup_Success()
+        public async Task SaveMainLedgerAccountGroup_Success()
         {
             var expectedResultCount = 1;
 
@@ -43,23 +43,23 @@ namespace TransactIt.Tests.Requests
             Assert.IsTrue(dataGenerationResult.Item1);
 
             var ledgerId = dataGenerationResult.Item2[0];
-            var model = new Domain.Models.LedgerAccountGroup { Number = 3000, Name = "TestLedger", Description = "TestLedger description" };
-            var request = new SaveLedgerAccountGroupRequest(ledgerId, model);
+            var model = new Domain.Models.LedgerMainAccountGroup { Number = 3000, Name = "TestLedger", Description = "TestLedger description" };
+            var request = new SaveLedgerMainAccountGroupRequest(ledgerId, model);
 
-            var handler = new SaveLedgerAccountGroupRequestHandler(_trackingContext, Mapper.Instance);
+            var handler = new SaveLedgerMainAccountGroupRequestHandler(_trackingContext, Mapper.Instance);
             var result = await handler.Handle(request, default(CancellationToken));
             Assert.AreEqual(result, Unit.Value);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NotFoundException), "Entity \"Ledger\" (666) was not found")]
-        public async Task SaveLedgerAccountGroup_Failure_NoParentLedger()
+        public async Task SaveMainLedgerAccountGroup_Failure_NoParentLedger()
         {
             var ledgerId = 666;
-            var model = new Domain.Models.LedgerAccountGroup { Number = 3000, Name = "TestLedger", Description = "TestLedger description" };
-            var request = new SaveLedgerAccountGroupRequest(ledgerId, model);
+            var model = new Domain.Models.LedgerMainAccountGroup { Number = 3000, Name = "TestLedger", Description = "TestLedger description" };
+            var request = new SaveLedgerMainAccountGroupRequest(ledgerId, model);
 
-            var handler = new SaveLedgerAccountGroupRequestHandler(_trackingContext, Mapper.Instance);
+            var handler = new SaveLedgerMainAccountGroupRequestHandler(_trackingContext, Mapper.Instance);
             var result = await handler.Handle(request, default(CancellationToken));
         }
 
@@ -69,23 +69,23 @@ namespace TransactIt.Tests.Requests
         [DataRow("Test", 3000, 1, true, true)]
         [DataRow(null, 0, 1, false, false)]
         [DataRow(null, 0, 1, true, false)]
-        public async Task SaveLedgerAccountGroup_Validation(
-            string ledgerAccountGroupName,
-            int ledgerAccountGroupNumber,
+        public async Task SaveLedgerMainAccountGroup_Validation(
+            string ledgerMainAccountGroupName,
+            int ledgerMainAccountGroupNumber,
             int ledgerId,
             bool instantiateModel,
             bool isValid)
         {
-            Domain.Models.LedgerAccountGroup model = null;
+            Domain.Models.LedgerMainAccountGroup model = null;
             if (instantiateModel)
             {
-                model = new Domain.Models.LedgerAccountGroup {
-                    Number = ledgerAccountGroupNumber,
-                    Name = ledgerAccountGroupName
+                model = new Domain.Models.LedgerMainAccountGroup {
+                    Number = ledgerMainAccountGroupNumber,
+                    Name = ledgerMainAccountGroupName
                 };
             }
-            var request = new SaveLedgerAccountGroupRequest(ledgerId, model);
-            var validator = new SaveLedgerAccountGroupValidator();
+            var request = new SaveLedgerMainAccountGroupRequest(ledgerId, model);
+            var validator = new SaveLedgerMainAccountGroupValidator();
             var validationResult = await validator.ValidateAsync(request);
             Assert.AreEqual(isValid, validationResult.IsValid);
         }

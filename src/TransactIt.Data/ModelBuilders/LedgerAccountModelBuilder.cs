@@ -13,6 +13,9 @@ namespace TransactIt.Data.ModelBuilders
             builder.Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getutcdate()");
 
+            builder.HasIndex(x => new { x.LedgerSubAccountGroupId, x.Number })
+                .IsUnique();
+
             builder.HasMany(x => x.AccountingEntries)
                 .WithOne(x => x.LedgerAccount)
                 .HasForeignKey(x => x.LedgerAccountId)

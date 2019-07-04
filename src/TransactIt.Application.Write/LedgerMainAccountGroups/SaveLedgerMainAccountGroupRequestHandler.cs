@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 using TransactIt.Data.Contexts;
 using TransactIt.Intersection.Exceptions;
 
-namespace TransactIt.Application.Write.LedgerAccountGroups
+namespace TransactIt.Application.Write.LedgerMainAccountGroups
 {
-    public class SaveLedgerAccountGroupRequestHandler : IRequestHandler<SaveLedgerAccountGroupRequest>
+    public class SaveLedgerMainAccountGroupRequestHandler : IRequestHandler<SaveLedgerMainAccountGroupRequest>
     {
         private readonly TrackingContext _context;
         private readonly IMapper _mapper;
 
-        public SaveLedgerAccountGroupRequestHandler(TrackingContext context, IMapper mapper)
+        public SaveLedgerMainAccountGroupRequestHandler(TrackingContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(SaveLedgerAccountGroupRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(SaveLedgerMainAccountGroupRequest request, CancellationToken cancellationToken)
         {
-            var entity = _mapper.Map<Domain.Entities.LedgerAccountGroup>(request.LedgerAccountGroup);
+            var entity = _mapper.Map<Domain.Entities.LedgerMainAccountGroup>(request.LedgerMainAccountGroup);
 
             if (!_context.Ledgers.Any(x => x.Id == request.LedgerId))
             {
@@ -29,7 +29,7 @@ namespace TransactIt.Application.Write.LedgerAccountGroups
             }
 
             entity.LedgerId = request.LedgerId;
-            await _context.LedgerAccountGroups.AddAsync(entity, cancellationToken);
+            await _context.LedgerMainAccountGroups.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
