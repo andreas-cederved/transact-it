@@ -96,7 +96,49 @@ namespace TransactIt.Tests.Requests
             var result = await handler.Handle(request, default(CancellationToken));
         }
 
-        //TODO: Add validation tests
+        [DataTestMethod]
+        [DataRow(
+            Domain.Models.AccountingEntry.EntrySide.Debit,
+            100,
+            Domain.Models.AccountingEntry.EntrySide.Debit,
+            100,
+            false)]
+        [DataRow(
+            Domain.Models.AccountingEntry.EntrySide.Debit,
+            100,
+            Domain.Models.AccountingEntry.EntrySide.Credit,
+            100,
+            true)]
+        [DataRow(
+            Domain.Models.AccountingEntry.EntrySide.Debit,
+            100,
+            Domain.Models.AccountingEntry.EntrySide.Credit,
+            90,
+            false)]
+        public async Task SaveFinancialTransaction_DebitCreditSum_Validation(
+            Domain.Models.AccountingEntry.EntrySide side1,
+            int amount1,
+            Domain.Models.AccountingEntry.EntrySide side2,
+            int amount2,
+            bool isValid)
+        {
+            var ledgerId = 666;
+            var model = new Domain.Models.FinancialTransaction
+            {
+                IdentifyingCode = 1,
+                TransactionDate = DateTime.UtcNow,
+                AccountingEntries = new List<Domain.Models.AccountingEntry>
+                {
+                    new Domain.Models.AccountingEntry { Amount = amount1, Side = side1, LedgerAccountId = 1},
+                    new Domain.Models.AccountingEntry { Amount = amount2, Side = side2, LedgerAccountId = 2}
+                }
+            };
+
+            var request = new SaveFinancialTransactionRequest(ledgerId, model);
+            var validator = new SaveFinancialTransactionValidator();
+            var validationResult = await validator.ValidateAsync(request);
+            Assert.AreEqual(isValid, validationResult.IsValid);
+        }
 
 
 
