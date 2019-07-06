@@ -10,7 +10,6 @@ namespace TransactIt.Application.Write.FinancialTransactions
         {
             RuleFor(x => x.FinancialTransaction).NotNull().DependentRules(() =>
             {
-                RuleFor(x => x.FinancialTransaction.IdentifyingCode).GreaterThan(0);
                 RuleFor(x => x.FinancialTransaction.TransactionDate).GreaterThan(DateTime.MinValue);
                 RuleFor(x => x.FinancialTransaction.AccountingEntries).NotEmpty();
                 RuleForEach(x => x.FinancialTransaction.AccountingEntries)

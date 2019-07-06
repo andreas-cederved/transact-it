@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +29,13 @@ namespace TransactIt.Application.Write.FinancialTransactions
                 throw new NotFoundException("Ledger", request.LedgerId);
             }
 
+            var lastIdentifyingCodeUsed = await _context.FinancialTransactions
+                .Where(x => x.LedgerId == request.LedgerId)
+                .OrderByDescending(x => x.CreatedDate)
+                .Select(x => x.IdentifyingCode)
+                .FirstOrDefaultAsync();
+
+            entity.IdentifyingCode = lastIdentifyingCodeUsed + 1;
             entity.LedgerId = request.LedgerId;
             await _context.FinancialTransactions.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
