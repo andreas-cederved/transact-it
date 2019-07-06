@@ -11,6 +11,8 @@ namespace TransactIt.Data.Contexts
         }
 
         public virtual DbSet<AccountingEntry> AccountingEntries { get; set; }
+        public virtual DbSet<AccountingTemplate> AccountingTemplates { get; set; }
+        public virtual DbSet<AccountingTemplateRule> AccountingTemplateRules { get; set; }
         public virtual DbSet<FinancialTransaction> FinancialTransactions { get; set; }
         public virtual DbSet<Ledger> Ledgers { get; set; }
         public virtual DbSet<LedgerAccount> LedgerAccounts { get; set; }

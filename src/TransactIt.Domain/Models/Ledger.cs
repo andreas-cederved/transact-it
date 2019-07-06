@@ -12,5 +12,6 @@ namespace TransactIt.Domain.Models
 
         public virtual IEnumerable<FinancialTransaction> FinancialTransactions { get; set; }
         public virtual IEnumerable<LedgerMainAccountGroup> LedgerMainAccountGroups { get; set; }
+        public virtual IEnumerable<AccountingTemplate> AccountingTemplates { get; set; }
     }
 }

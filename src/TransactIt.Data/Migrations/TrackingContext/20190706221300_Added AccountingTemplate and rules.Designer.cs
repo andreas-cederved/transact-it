@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TransactIt.Data.Contexts;
 
 namespace TransactIt.Data.Migrations.TrackingContext
 {
     [DbContext(typeof(TransactIt.Data.Contexts.TrackingContext))]
-    partial class TrackingContextModelSnapshot : ModelSnapshot
+    [Migration("20190706221300_Added AccountingTemplate and rules")]
+    partial class AddedAccountingTemplateandrules
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -20,6 +20,10 @@ namespace TransactIt.Data.ModelBuilders
             builder.HasMany(x => x.LedgerMainAccountGroups)
                 .WithOne(x => x.Ledger)
                 .HasForeignKey(x => x.LedgerId);
+
+            builder.HasMany(x => x.AccountingTemplates)
+                .WithOne(x => x.Ledger)
+                .HasForeignKey(x => x.LedgerId);
         }
     }
 }

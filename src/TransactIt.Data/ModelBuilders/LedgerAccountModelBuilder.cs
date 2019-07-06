@@ -20,6 +20,11 @@ namespace TransactIt.Data.ModelBuilders
                 .WithOne(x => x.LedgerAccount)
                 .HasForeignKey(x => x.LedgerAccountId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(x => x.AccountingTemplateRules)
+                .WithOne(x => x.LedgerAccount)
+                .HasForeignKey(x => x.LedgerAccountId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
