@@ -12,6 +12,6 @@ namespace TransactIt.Domain.Models
         public int Id { get; set; }
         public EntrySide Side { get; set; }
         public decimal Amount { get; set; }
-        public int LedgerAccountId { get; set; }
+        public int AccountId { get; set; }
     }
 }

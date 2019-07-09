@@ -3,15 +3,14 @@ using System.Collections.Generic;
 
 namespace TransactIt.Domain.Models
 {
-    public class Ledger
+    public class TransactionTemplate
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string DefaultTransactionDescription { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public virtual IEnumerable<Transaction> Transactions { get; set; }
-        public virtual IEnumerable<MainAccountGroup> MainAccountGroups { get; set; }
-        public virtual IEnumerable<TransactionTemplate> TransactionTemplates { get; set; }
+        public virtual IEnumerable<TransactionTemplateRule> TransactionTemplateRules { get; set; }
     }
 }

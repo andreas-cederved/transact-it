@@ -3,15 +3,17 @@ using System.Collections.Generic;
 
 namespace TransactIt.Domain.Entities
 {
-    public class Ledger
+    public class SubAccountGroup
     {
         public int Id { get; set; }
+        public int Number { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public virtual IEnumerable<Transaction> Transactions { get; set; }
-        public virtual IEnumerable<MainAccountGroup> MainAccountGroups { get; set; }
-        public virtual IEnumerable<TransactionTemplate> TransactionTemplates { get; set; }
+        public int MainAccountGroupId { get; set; }
+        public virtual MainAccountGroup MainAccountGroup { get; set; }
+
+        public virtual IEnumerable<Account> Accounts { get; set; }
     }
 }

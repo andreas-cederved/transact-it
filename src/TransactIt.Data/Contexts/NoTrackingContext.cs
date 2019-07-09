@@ -11,13 +11,13 @@ namespace TransactIt.Data.Contexts
         }
 
         public virtual DbSet<AccountingEntry> AccountingEntries { get; set; }
-        public virtual DbSet<AccountingTemplate> AccountingTemplates { get; set; }
-        public virtual DbSet<AccountingTemplateRule> AccountingTemplateRules { get; set; }
-        public virtual DbSet<FinancialTransaction> FinancialTransactions { get; set; }
+        public virtual DbSet<TransactionTemplate> TransactionTemplates { get; set; }
+        public virtual DbSet<TransactionTemplateRule> TransactionTemplateRules { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<Ledger> Ledgers { get; set; }
-        public virtual DbSet<LedgerAccount> LedgerAccounts { get; set; }
-        public virtual DbSet<LedgerMainAccountGroup> LedgerMainAccountGroups { get; set; }
-        public virtual DbSet<LedgerSubAccountGroup> LedgerSubAccountGroups { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<MainAccountGroup> MainAccountGroups { get; set; }
+        public virtual DbSet<SubAccountGroup> SubAccountGroups { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)

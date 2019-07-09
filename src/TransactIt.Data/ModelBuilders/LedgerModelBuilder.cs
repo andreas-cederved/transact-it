@@ -13,15 +13,15 @@ namespace TransactIt.Data.ModelBuilders
             builder.Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getutcdate()");
 
-            builder.HasMany(x => x.FinancialTransactions)
+            builder.HasMany(x => x.Transactions)
                 .WithOne(x => x.Ledger)
                 .HasForeignKey(x => x.LedgerId);
 
-            builder.HasMany(x => x.LedgerMainAccountGroups)
+            builder.HasMany(x => x.MainAccountGroups)
                 .WithOne(x => x.Ledger)
                 .HasForeignKey(x => x.LedgerId);
 
-            builder.HasMany(x => x.AccountingTemplates)
+            builder.HasMany(x => x.TransactionTemplates)
                 .WithOne(x => x.Ledger)
                 .HasForeignKey(x => x.LedgerId);
         }

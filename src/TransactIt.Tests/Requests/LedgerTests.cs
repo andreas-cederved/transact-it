@@ -34,11 +34,13 @@ namespace TransactIt.Tests.Requests
             Mapper.Initialize(x =>
             {
                 x.AddProfile<Infrastructure.Profiles.LedgerProfile>();
-                x.AddProfile<Infrastructure.Profiles.FinancialTransactionProfile>();
-                x.AddProfile<Infrastructure.Profiles.LedgerMainAccountGroupProfile>();
-                x.AddProfile<Infrastructure.Profiles.LedgerSubAccountGroupProfile>();
-                x.AddProfile<Infrastructure.Profiles.LedgerAccountProfile>();
+                x.AddProfile<Infrastructure.Profiles.TransactionProfile>();
+                x.AddProfile<Infrastructure.Profiles.MainAccountGroupProfile>();
+                x.AddProfile<Infrastructure.Profiles.SubAccountGroupProfile>();
+                x.AddProfile<Infrastructure.Profiles.AccountProfile>();
                 x.AddProfile<Infrastructure.Profiles.AccountingEntryProfile>();
+                x.AddProfile<Infrastructure.Profiles.TransactionTemplateProfile>();
+                x.AddProfile<Infrastructure.Profiles.TransactionTemplateRuleProfile>();
             });
         }
 

@@ -11,9 +11,9 @@ namespace TransactIt.Infrastructure.Profiles
                 .ForMember(target => target.Name, source => source.MapFrom(prop => prop.Name))
                 .ForMember(target => target.Description, source => source.MapFrom(prop => prop.Description))
                 .ForMember(target => target.CreatedDate, source => source.MapFrom(prop => prop.CreatedDate))
-                .ForMember(target => target.FinancialTransactions, source => source.MapFrom(prop => prop.FinancialTransactions))
-                .ForMember(target => target.LedgerMainAccountGroups, source => source.MapFrom(prop => prop.LedgerMainAccountGroups))
-                .ForMember(target => target.AccountingTemplates, source => source.MapFrom(prop => prop.AccountingTemplates));
+                .ForMember(target => target.Transactions, source => source.MapFrom(prop => prop.Transactions))
+                .ForMember(target => target.MainAccountGroups, source => source.MapFrom(prop => prop.MainAccountGroups))
+                .ForMember(target => target.TransactionTemplates, source => source.MapFrom(prop => prop.TransactionTemplates));
 
 
             CreateMap<Domain.Models.Ledger, Domain.Entities.Ledger>()
@@ -21,9 +21,9 @@ namespace TransactIt.Infrastructure.Profiles
                 .ForMember(target => target.Name, source => source.MapFrom(prop => prop.Name))
                 .ForMember(target => target.Description, source => source.MapFrom(prop => prop.Description))
                 .ForMember(target => target.CreatedDate, source => source.MapFrom(prop => prop.CreatedDate))
-                .ForMember(target => target.FinancialTransactions, option => option.Ignore())
-                .ForMember(target => target.LedgerMainAccountGroups, option => option.Ignore())
-                .ForMember(target => target.AccountingTemplates, option => option.Ignore());
+                .ForMember(target => target.Transactions, option => option.Ignore())
+                .ForMember(target => target.MainAccountGroups, option => option.Ignore())
+                .ForMember(target => target.TransactionTemplates, option => option.Ignore());
         }
     }
 }
