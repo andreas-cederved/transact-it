@@ -12,7 +12,7 @@ namespace TransactIt.Application.Write.TransactionTemplates
                 RuleFor(x => x.TransactionTemplate.Name).NotEmpty();
                 RuleFor(x => x.TransactionTemplate.TransactionTemplateRules).NotEmpty();
                 RuleForEach(x => x.TransactionTemplate.TransactionTemplateRules)
-                    .Must(x => x.LedgerAccountId > 0)
+                    .Must(x => x.AccountId > 0)
                     .WithMessage("Transaction template rule entries must have a LedgerAccountId of more than 0");
                 RuleFor(x => x.TransactionTemplate.TransactionTemplateRules)
                     .Must(x =>

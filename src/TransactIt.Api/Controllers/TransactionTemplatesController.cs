@@ -52,9 +52,9 @@ namespace TransactIt.Api.Controllers
         [SwaggerResponse(200, "Successfully distributed amount.", typeof(IEnumerable<Domain.Models.AccountingEntry>))]
         [SwaggerResponse(400, "Invalid request or data.", typeof(IEnumerable<ValidationFailure>))]
         [SwaggerResponse(404, "Parent entity not found.", typeof(IEnumerable<ValidationFailure>))]
-        public async Task Create(int id, [FromQuery] decimal amount)
+        public async Task<IEnumerable<Domain.Models.AccountingEntry>> Get(int id, [FromQuery] decimal amount)
         {
-            await _mediator.Send(new DistributeAmountRequest(id, amount));
+            return await _mediator.Send(new DistributeAmountRequest(id, amount));
         }
 
     }

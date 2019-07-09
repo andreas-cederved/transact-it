@@ -9,7 +9,6 @@ namespace TransactIt.Domain.Models
             Credit
         }
 
-        public int Id { get; set; }
         public EntrySide Side { get; set; }
         public decimal Amount { get; set; }
         public int AccountId { get; set; }
