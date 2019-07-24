@@ -25,6 +25,9 @@ namespace TransactIt.Application.Read.Ledgers
                 .Include(x => x.MainAccountGroups)
                 .ThenInclude(x => x.SubAccountGroups)
                 .ThenInclude(x => x.Accounts)
+                .ThenInclude(x => x.AccountingEntries)
+                .Include(x => x.Transactions)
+                .ThenInclude(x => x.AccountingEntries)
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
             return _mapper.Map<Ledger>(result);
         }

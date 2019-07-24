@@ -37,6 +37,14 @@ namespace TransactIt.Api
             services.AddAutoMapperWithProfiles();
             services.AddDatabaseContexts(Configuration);
             services.AddMediatorWithRequests();
+
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddControllers(options =>
             {
                 options.Filters.Add(new ValidationExceptionFilter());
@@ -111,6 +119,8 @@ namespace TransactIt.Api
             });
 
             app.UseAuthorization();
+
+            app.UseCors("MyPolicy");
 
             app.UseEndpoints(endpoints =>
             {
