@@ -12,6 +12,9 @@ namespace TransactIt.Data.ModelBuilders
 
             builder.Property(x => x.Name).IsRequired();
 
+            builder.Property(x => x.DefaultTransactionAmount)
+                .HasColumnType("Money");
+
             builder.Property(x => x.CreatedDate)
                 .HasDefaultValueSql("getutcdate()");
 
