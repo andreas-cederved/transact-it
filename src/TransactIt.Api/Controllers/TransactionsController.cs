@@ -4,6 +4,7 @@ using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using TransactIt.Application.Read.GenerateTemplateRules;
 using TransactIt.Application.Write.Transactions;
 
 namespace TransactIt.Api.Controllers
@@ -39,6 +40,20 @@ namespace TransactIt.Api.Controllers
         public async Task Create(int id, [FromBody] Domain.Models.Transaction model)
         {
             await _mediator.Send(new SaveTransactionRequest(id, model));
+        }
+
+        /// <summary>
+        /// Get generated transaction template rules for transaction.
+        /// </summary>
+        /// <param name="id">The transaction identifier.</param>
+        /// <returns>An array of transaction template rules representing the transactions accounting entries.</returns>
+        [HttpGet("api/transactions/{id}/template-rules")]
+        [SwaggerResponse(200, "Successfully generated transaction template rules.", typeof(IEnumerable<Domain.Models.TransactionTemplateRule>))]
+        [SwaggerResponse(400, "Invalid request or data.", typeof(IEnumerable<ValidationFailure>))]
+        [SwaggerResponse(404, "Parent entity not found.", typeof(IEnumerable<ValidationFailure>))]
+        public async Task<IEnumerable<Domain.Models.TransactionTemplateRule>> Get(int id)
+        {
+            return await _mediator.Send(new GenerateTemplateRuleRequest(id));
         }
 
     }

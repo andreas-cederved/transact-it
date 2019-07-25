@@ -13,10 +13,10 @@ namespace TransactIt.Application.Read.DistributeAmounts
 {
     public class DistributeAmountRequestHandler : IRequestHandler<DistributeAmountRequest, List<AccountingEntry>>
     {
-        private readonly TrackingContext _context;
+        private readonly NoTrackingContext _context;
         private readonly IMapper _mapper;
 
-        public DistributeAmountRequestHandler(TrackingContext context, IMapper mapper)
+        public DistributeAmountRequestHandler(NoTrackingContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
