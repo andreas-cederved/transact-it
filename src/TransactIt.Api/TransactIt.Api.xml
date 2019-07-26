@@ -137,6 +137,13 @@
             <param name="model">A transaction template model sent through request body.</param>
             <returns>This is a command it does not send a modeled response.</returns>
         </member>
+        <member name="M:TransactIt.Api.Controllers.TransactionTemplatesController.Get(System.Int32)">
+            <summary>
+            Gets all transaction templates belonging to the specified ledger.
+            </summary>
+            <param name="id">The parent ledger identifier.</param>
+            <returns>An array of transaction templates</returns>
+        </member>
         <member name="M:TransactIt.Api.Controllers.TransactionTemplatesController.Get(System.Int32,System.Decimal)">
             <summary>
             Get the distribution for the amount using the specified transaction template.

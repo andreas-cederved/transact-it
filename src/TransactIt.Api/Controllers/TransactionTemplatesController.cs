@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using TransactIt.Application.Write.TransactionTemplates;
 using TransactIt.Application.Read.DistributeAmounts;
+using TransactIt.Application.Read.TransactionTemplates;
 
 namespace TransactIt.Api.Controllers
 {
@@ -40,6 +41,20 @@ namespace TransactIt.Api.Controllers
         public async Task Create(int id, [FromBody] Domain.Models.TransactionTemplate model)
         {
             await _mediator.Send(new SaveTransactionTemplateRequest(id, model));
+        }
+
+        /// <summary>
+        /// Gets all transaction templates belonging to the specified ledger.
+        /// </summary>
+        /// <param name="id">The parent ledger identifier.</param>
+        /// <returns>An array of transaction templates</returns>
+        [HttpGet("api/ledgers/{id}/transaction-templates")]
+        [SwaggerResponse(200, "Successfully retrieved data.", typeof(IEnumerable<Domain.Models.TransactionTemplate>))]
+        [SwaggerResponse(400, "Invalid request or data.", typeof(IEnumerable<ValidationFailure>))]
+        [SwaggerResponse(404, "Parent entity not found.", typeof(IEnumerable<ValidationFailure>))]
+        public async Task<IEnumerable<Domain.Models.TransactionTemplate>> Get(int id)
+        {
+            return await _mediator.Send(new FindAllTransactionTemplatesRequest(id));
         }
 
         /// <summary>
