@@ -103,6 +103,20 @@
             </summary>
             <param name="mediator">The request mediator.</param>
         </member>
+        <member name="M:TransactIt.Api.Controllers.TransactionsController.Get(System.Int32)">
+            <summary>
+            Gets the specific transaction by identifier.
+            </summary>
+            <param name="id">The transaction identifier.</param>
+            <returns>A specific transaction with accounts included <see cref="T:TransactIt.Domain.Models.TransactionIncludeAccounts"/></returns>
+        </member>
+        <member name="M:TransactIt.Api.Controllers.TransactionsController.GetTemplateRule(System.Int32)">
+            <summary>
+            Get generated transaction template rules for transaction.
+            </summary>
+            <param name="id">The transaction identifier.</param>
+            <returns>An array of transaction template rules representing the transactions accounting entries.</returns>
+        </member>
         <member name="M:TransactIt.Api.Controllers.TransactionsController.Create(System.Int32,TransactIt.Domain.Models.Transaction)">
             <summary>
             Creates a new transaction.
@@ -110,13 +124,6 @@
             <param name="id">The parent ledger identifier.</param>
             <param name="model">A transaction model sent through request body.</param>
             <returns>This is a command it does not send a modeled response.</returns>
-        </member>
-        <member name="M:TransactIt.Api.Controllers.TransactionsController.Get(System.Int32)">
-            <summary>
-            Get generated transaction template rules for transaction.
-            </summary>
-            <param name="id">The transaction identifier.</param>
-            <returns>An array of transaction template rules representing the transactions accounting entries.</returns>
         </member>
         <member name="T:TransactIt.Api.Controllers.TransactionTemplatesController">
             <summary>
